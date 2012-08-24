@@ -14,7 +14,7 @@ class TumblelogWidgetPlacementInline(admin.TabularInline):
 
 class TumblelogAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'mount_on', 'theme', 'is_active', 'created_at')
-    list_filter = ('theme',)
+    list_filter = ('theme', 'is_active')
     list_editable = ('theme', 'is_active')
     date_hierarchy = 'created_at'
     inlines = (TumblelogWidgetPlacementInline, TumblelogPostInline)
