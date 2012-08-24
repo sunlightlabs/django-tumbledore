@@ -2,7 +2,6 @@
 {% load markup tumbledore %}
 
 {% block content %}
-
 {% for post in object_list %}
 {% tumblevar permalink %}{% url tumble_post post.tumblelog.mount_on, post.slug %}{% endtumblevar %}
     <article class="hentry">

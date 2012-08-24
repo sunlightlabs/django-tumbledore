@@ -18,13 +18,13 @@
     {% block css %}{{ tumblelog.extra_styles|safe }}{% endblock %}
 </head>
 <body>
-<header lcass="container">
+<header class="container">
     <div class="row">
         <div class="span12">
             {% block header %}
             <div class="hero-unit">
-                <h1>{{ tumblelog.title }}</h1>
-                <p>{{ tubmlelog.description|linebreaksbr }}</p>
+                <h1>{{ tumblelog.name }}</h1>
+                <p>{{ tumblelog.description|linebreaksbr }}</p>
             </div>
             {% endblock %}
         </div>

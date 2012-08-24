@@ -17,14 +17,20 @@ TUMBL_THEME_CHOICES = [(path, path.split('/')[-1]) for path in THEME_PATHS]
 
 
 class Tumblelog(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True, default='')
-    mount_on = models.CharField(max_length=200, unique=True, db_index=True)
+    name = models.CharField(max_length=200,
+                            help_text='This will display in the header area of your tumblelog.')
+    description = models.TextField(blank=True, default='',
+                                   help_text='This will display below the name.')
+    mount_on = models.CharField(max_length=200, blank=True, default='',
+                                unique=True, db_index=True,
+                                help_text="The root url of your tumblelog.")
     theme = models.CharField(max_length=255, choices=TUMBL_THEME_CHOICES)
     posts_per_page = models.IntegerField(default=DEFAULT_POSTS_PER_PAGE)
     widgets = models.ManyToManyField('TumblelogWidget', through='TumblelogWidgetPlacement')
-    extra_styles = models.TextField(blank=True, default='')
-    extra_scripts = models.TextField(blank=True, default='')
+    extra_styles = models.TextField(blank=True, default='',
+                                    help_text='Inserted before the close of the head tag.')
+    extra_scripts = models.TextField(blank=True, default='',
+                                     help_text='Inserted before the close of the body tag.')
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
@@ -48,7 +54,8 @@ class TumblelogPost(models.Model):
     slug = models.SlugField(max_length=200, db_index=True)
     tumblelog = models.ForeignKey(Tumblelog, related_name='posts',
                                   verbose_name='Post in')
-    author = models.CharField(max_length=200, blank=True, default='')
+    author = models.CharField(max_length=200, blank=True, default='',
+                              help_text='HTML is allowed.')
     content = models.TextField(blank=True, default='')
     excerpt = models.TextField(blank=True, default='',
                                help_text='Only needed if this post has a permalink.')
