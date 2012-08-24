@@ -6,7 +6,7 @@ from tumbledore.models import *
 
 def index(request, mount_point):
     page = int(request.GET.get('page', '1'))
-    tumblelog = get_object_or_404(Tumblelog, mount_on=mount_point)
+    tumblelog = get_object_or_404(Tumblelog, mount_on=mount_point, is_active=True)
     queryset = tumblelog.posts.all() if request.user.is_staff else tumblelog.posts.published()
     object_list = Paginator(queryset, tumblelog.posts_per_page).page(int(page))
 
@@ -18,7 +18,7 @@ def index(request, mount_point):
 
 
 def post(request, mount_point, slug):
-    tumblelog = get_object_or_404(Tumblelog, mount_on=mount_point)
+    tumblelog = get_object_or_404(Tumblelog, mount_on=mount_point, is_active=True)
     query_args = {
         'slug': slug,
         'tumblelog_id': tumblelog.id,

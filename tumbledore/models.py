@@ -31,6 +31,7 @@ class Tumblelog(models.Model):
                                     help_text='Inserted before the close of the head tag.')
     extra_scripts = models.TextField(blank=True, default='',
                                      help_text='Inserted before the close of the body tag.')
+    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 

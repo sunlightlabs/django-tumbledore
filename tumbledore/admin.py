@@ -5,6 +5,7 @@ from tumbledore.models import *
 
 class TumblelogPostInline(admin.StackedInline):
     model = TumblelogPost
+    list_editable = ('is_published', 'is_sticky')
 
 
 class TumblelogWidgetPlacementInline(admin.TabularInline):
@@ -14,7 +15,7 @@ class TumblelogWidgetPlacementInline(admin.TabularInline):
 class TumblelogAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'mount_on', 'theme', 'created_at')
     list_filter = ('theme',)
-    list_editable = ('theme',)
+    list_editable = ('theme', 'is_active')
     date_hierarchy = 'created_at'
     inlines = (TumblelogWidgetPlacementInline, TumblelogPostInline)
     save_on_top = True
