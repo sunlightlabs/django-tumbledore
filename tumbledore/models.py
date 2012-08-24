@@ -41,6 +41,11 @@ class Tumblelog(models.Model):
     def __unicode__(self):
         return unicode(self.name)
 
+    def save(self, **kwargs):
+        self.mount_on = self.mount_on.strip('/')
+
+        super(Tumblelog, self).save(**kwargs)
+
 
 class TumblelogPostManager(models.Manager):
     def published(qset):
