@@ -1,0 +1,22 @@
+{% extends "tumbledore/themes/default/base.html" %}
+{% load markup tumbledore %}
+
+{% block content %}
+<article class="hentry">
+    <header class="clearfix">
+        <h2 class="entry-title">{{ post.title }}</h2>
+        <div class="meta">
+            <address class="author">by {{ post.author|safe }}</address>
+            <time datetime="{{ post.published_at }}" class="published muted" pubdate>{{ post.published_at|date:"M d, Y \a\t P" }}</time>
+        </div>
+    </header>
+    <div class="postContent entry-content">
+            {{ post.content|safe|markdown }}
+    </div>
+</article>
+<hr>
+{% endblock %}
+
+{% block sidebar %}
+    {{ block.super }}
+{% endblock %}
