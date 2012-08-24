@@ -10,4 +10,4 @@ appname and version.
 """
 
 __appname__ = "tumbledore"
-__version__ = "0.1.0"
+__version__ = "0.1.1"

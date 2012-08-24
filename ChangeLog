@@ -1,5 +1,12 @@
 2012-08-24  Dan Drinkard <ddrinkard@sunlightfoundation.com>
 
+* Added South migrations
+* Turn tumblelogs on or off with is_active checkbox
+* Release is 0.1.1
+
+
+2012-08-24  Dan Drinkard <ddrinkard@sunlightfoundation.com>
+
 * Initial ChangeLog commit entry.
 * Release is 0.1.0
 * Needs docs, tests!
