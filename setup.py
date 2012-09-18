@@ -10,7 +10,7 @@ long_description = open('README.md').read()
 setup(
     name       = __appname__,
     version    = __version__,
-    packages   = [ 'tumbledore', ],
+    packages   = ['tumbledore', ],
 
     author       = "Dan Drinkard",
     author_email = "ddrinkard@sunlightfoundation.com",
@@ -21,5 +21,5 @@ setup(
     url              = "https://github.com/sunlightlabs/django-tumbledore",
 
     platforms        = ['any'],
-    install_requires = ['django >= 1.4', 'jsonfield', ]
+    install_requires = ['jsonfield', ]
 )
