@@ -5,6 +5,7 @@ import os
 from django.conf import settings
 from django.db import models
 from django.utils.html import escapejs
+from jsonfield import JSONField
 
 
 DEFAULT_POSTS_PER_PAGE = 10
