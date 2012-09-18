@@ -15,6 +15,11 @@ for location in settings.TEMPLATE_DIRS:
     THEME_PATHS += glob.glob(os.path.join(location, 'tumbledore', 'themes', '*'))
 TUMBL_THEME_CHOICES = [(path, path.split('/')[-1]) for path in THEME_PATHS]
 
+SORT_BY_CHOICES = (
+    ('D', 'Date',),
+    ('O', 'Order',),
+)
+
 
 class Tumblelog(models.Model):
     name = models.CharField(max_length=200,
@@ -26,6 +31,7 @@ class Tumblelog(models.Model):
                                 help_text="The root url of your tumblelog.")
     theme = models.CharField(max_length=255, choices=TUMBL_THEME_CHOICES)
     posts_per_page = models.IntegerField(default=DEFAULT_POSTS_PER_PAGE)
+    sort_posts_by = models.CharField(max_length=1, choices=SORT_BY_CHOICES, default='D')
     widgets = models.ManyToManyField('TumblelogWidget', through='TumblelogWidgetPlacement')
     extra_styles = models.TextField(blank=True, default='',
                                     help_text='Inserted before the close of the head tag.')
@@ -65,6 +71,10 @@ class TumblelogPost(models.Model):
     content = models.TextField(blank=True, default='')
     excerpt = models.TextField(blank=True, default='',
                                help_text='Only needed if this post has a permalink.')
+    sort_order = models.IntegerField(blank=True, default=0,
+                                     help_text='Set this if your tumblelog is using custom ordering.')
+    custom_data = models.JSONField(default="{}",
+                                   help_text='As JSON; will override context variables, e.g., permalink')
     is_published = models.BooleanField(default=False)
     is_sticky = models.BooleanField(default=False)
     has_permalink = models.BooleanField(default=False)

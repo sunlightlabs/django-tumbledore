@@ -3,10 +3,9 @@
 
 {% block content %}
 {% for post in object_list %}
-{% tumblevar permalink %}{% url tumble_post post.tumblelog.mount_on, post.slug %}{% endtumblevar %}
     <article class="hentry">
         <header class="clearfix">
-            <h2 class="entry-title"><a href="{{ permalink }}">{{ post.title }}</a></h2>
+            <h2 class="entry-title"><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
             <div class="meta">
                 <address class="author">by {{ post.author|safe }}</address>
                 <time datetime="{{ post.published_at }}" class="published muted" pubdate>{{ post.published_at|date:"M d, Y \a\t P" }}</time>
@@ -16,7 +15,7 @@
             {% if post.has_permalink %}
                 {{ post.excerpt|safe|markdown }}
                 <p class="more">
-                    <a href="{{ permalink }}">Read more &raquo;</a>
+                    <a href="{{ post.permalink }}">Read more &raquo;</a>
                 </p>
             {% else %}
                 {{ post.content|safe|markdown }}

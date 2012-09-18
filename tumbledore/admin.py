@@ -6,6 +6,7 @@ from tumbledore.models import *
 class TumblelogPostInline(admin.StackedInline):
     model = TumblelogPost
     list_editable = ('is_published', 'is_sticky')
+    prepopulated_fields = {"slug": ("title",), "custom_data": '{}'}
 
 
 class TumblelogWidgetPlacementInline(admin.TabularInline):
@@ -36,7 +37,7 @@ class TumblelogPostAdmin(admin.ModelAdmin):
     list_filter = ('author', 'tumblelog', 'is_published', 'is_sticky')
     list_editable = ('is_published', 'is_sticky')
     date_hierarchy = 'published_at'
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ("title",), "custom_data": '{}'}
     save_on_top = True
 admin.site.register(TumblelogPost, TumblelogPostAdmin)
 

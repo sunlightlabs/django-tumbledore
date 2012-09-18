@@ -21,5 +21,5 @@ setup(
     url              = "https://github.com/sunlightlabs/django-tumbledore",
 
     platforms        = ['any'],
-    install_requires = ['django >= 1.4', ]
+    install_requires = ['django >= 1.4', 'jsonfield', ]
 )

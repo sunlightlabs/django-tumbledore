@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render
 from tumbledore.models import *
@@ -9,6 +10,12 @@ def index(request, mount_point):
     tumblelog = get_object_or_404(Tumblelog, mount_on=mount_point, is_active=True)
     queryset = tumblelog.posts.all() if request.user.is_staff else tumblelog.posts.published()
     object_list = Paginator(queryset, tumblelog.posts_per_page).page(int(page))
+    for obj in object_list:
+        # set permalink
+        permalink = reverse('tumble_post', urlconf='tumbledore.urls', args=[obj.mount_on, obj.slug])
+        obj = obj.__dict__.update(permalink=permalink)
+        # override any custom variables
+        obj = obj.__dict__.update(**obj.custom_data)
 
     return render(request, '%s/index.html' % tumblelog.theme, {
         'tumblelog': tumblelog,
