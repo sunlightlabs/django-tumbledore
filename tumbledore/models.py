@@ -74,7 +74,7 @@ class TumblelogPost(models.Model):
                                help_text='Only needed if this post has a permalink.')
     sort_order = models.IntegerField(blank=True, default=0,
                                      help_text='Set this if your tumblelog is using custom ordering.')
-    custom_data = JSONField(default="{}",
+    custom_data = JSONField(default="{}", blank=True,
                                    help_text='As JSON; will override context variables, e.g., permalink')
     is_published = models.BooleanField(default=False)
     is_sticky = models.BooleanField(default=False)

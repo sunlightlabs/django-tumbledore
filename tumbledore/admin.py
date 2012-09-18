@@ -26,7 +26,7 @@ class TumblelogAdmin(admin.ModelAdmin):
         }),
         ('Advanced options', {
             'classes': ('collapse',),
-            'fields': ('description', 'extra_styles', 'extra_scripts')
+            'fields': ('description', 'sort_posts_by', 'extra_styles', 'extra_scripts')
         }),
     )
 admin.site.register(Tumblelog, TumblelogAdmin)

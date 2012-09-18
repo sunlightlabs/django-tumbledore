@@ -15,7 +15,7 @@ def index(request, mount_point):
     object_list = Paginator(queryset, tumblelog.posts_per_page).page(int(page))
     for obj in object_list:
         # set permalink
-        permalink = reverse('tumble_post', urlconf='tumbledore.urls', args=[obj.mount_on, obj.slug])
+        permalink = reverse('tumble_post', urlconf='tumbledore.urls', args=[obj.tumblelog.mount_on, obj.slug])
         obj = obj.__dict__.update(permalink=permalink)
         # override any custom variables
         obj = obj.__dict__.update(**obj.custom_data)
