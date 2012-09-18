@@ -18,7 +18,8 @@ def index(request, mount_point):
         permalink = reverse('tumble_post', urlconf='tumbledore.urls', args=[obj.tumblelog.mount_on, obj.slug])
         obj.__dict__.update(permalink=permalink)
         # override any custom variables
-        obj.__dict__.update(**obj.custom_data)
+        if isinstance(obj.custom_data, dict):
+            obj.__dict__.update(**obj.custom_data)
 
     return render(request, '%s/index.html' % tumblelog.theme, {
         'tumblelog': tumblelog,
