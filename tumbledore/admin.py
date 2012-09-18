@@ -14,9 +14,9 @@ class TumblelogWidgetPlacementInline(admin.TabularInline):
 
 
 class TumblelogAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'mount_on', 'theme', 'is_active', 'created_at')
+    list_display = ('__unicode__', 'mount_on', 'theme', 'is_active', 'sort_posts_by', 'created_at')
     list_filter = ('theme', 'is_active')
-    list_editable = ('theme', 'is_active')
+    list_editable = ('theme', 'is_active', 'sort_posts_by')
     date_hierarchy = 'created_at'
     inlines = (TumblelogWidgetPlacementInline, TumblelogPostInline)
     save_on_top = True
@@ -39,6 +39,16 @@ class TumblelogPostAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_at'
     prepopulated_fields = {"slug": ("title",), "custom_data": '{}'}
     save_on_top = True
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'tumblelog', 'author', 'content',
+                       'is_published', 'is_sticky', 'has_permalink', 'published_at')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('excerpt', 'sort_order', 'custom_data')
+        }),
+    )
 admin.site.register(TumblelogPost, TumblelogPostAdmin)
 
 

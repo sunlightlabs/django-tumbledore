@@ -1,3 +1,11 @@
+2012-09-18  Dan Drinkard <ddrinkard@sunlightfoundation.com>
+
+* Custom Data JSONField is available for posts. Included data is added to
+  the root of the template render context.
+* Custom ordering is possible by setting 'sort posts by' on the tumblelog
+* SQL migration included
+* Release is 0.1.2
+
 2012-08-24  Dan Drinkard <ddrinkard@sunlightfoundation.com>
 
 * Added South migrations

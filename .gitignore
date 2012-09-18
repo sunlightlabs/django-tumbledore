@@ -2,3 +2,6 @@
 *.log
 *.pyc
 *.pot
+/build
+/dist
+tumbledore.egg-info
