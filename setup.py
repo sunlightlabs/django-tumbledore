@@ -10,7 +10,7 @@ long_description = open('README.md').read()
 setup(
     name       = __appname__,
     version    = __version__,
-    packages   = ['tumbledore', ],
+    packages   = ['tumbledore', 'tumbledore.templates', 'tumbledore.templatetags', 'tumbledore.migrations'],
 
     author       = "Dan Drinkard",
     author_email = "ddrinkard@sunlightfoundation.com",
