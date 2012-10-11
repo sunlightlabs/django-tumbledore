@@ -32,7 +32,7 @@ class CaptureasNode(template.Node):
 
 
 @register.tag(name='tumbleposts')
-def do_tumblelog_posts(parser, token):
+def do_tumbleposts(parser, token):
     '''
     Iterates given block over tumblelog posts.
     {% tumbleposts as post tumblelog_id=1 **kwargs %}
@@ -66,9 +66,14 @@ def do_tumblelog_posts(parser, token):
     if 'order_by' in kwargs:
         order_by = kwargs['order_by']
         del kwargs['order_by']
+    if 'limit' in kwargs:
+        limit = int(kwargs['limit'])
+        del kwargs['limit']
     object_list = models.TumblelogPost.objects.filter(**kwargs)
     if order_by:
         object_list = object_list.order_by(order_by)
+    if limit:
+        object_list = object_list[:limit]
 
     # set up FilterExpression from object_list
     sequence = FilterExpression('', parser)
