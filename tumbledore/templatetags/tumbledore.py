@@ -52,12 +52,12 @@ def do_tumbleposts(parser, token):
     #coerce kwargs to expected types
     for kwarg in kwargs_list:
         key, val = kwarg.split('=')
-        if val in ['True', 'False']:
-            val = bool(val)
         try:
             val = int(val)
         except ValueError:
             pass
+        if val in ['True', 'False']:
+            val = bool(val)
         kwargs[key] = val
 
     # preflight kwargs before running any queries
@@ -67,7 +67,7 @@ def do_tumbleposts(parser, token):
         order_by = kwargs['order_by']
         del kwargs['order_by']
     if 'limit' in kwargs:
-        limit = int(kwargs['limit'])
+        limit = kwargs['limit']
         del kwargs['limit']
     object_list = models.TumblelogPost.objects.filter(**kwargs)
     if order_by:
