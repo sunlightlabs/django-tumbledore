@@ -1,7 +1,9 @@
 from django import template
+from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.template.base import FilterExpression
 from django.template.defaulttags import ForNode
+
 
 models = __import__('tumbledore', None, None, [], 2).models
 register = template.Library()
@@ -74,6 +76,15 @@ def do_tumbleposts(parser, token):
         object_list = object_list.order_by(order_by)
     if limit:
         object_list = object_list[:limit]
+
+    # apply custom data
+    for obj in object_list:
+        # set permalink
+        permalink = reverse('tumble_post', urlconf='tumbledore.urls', args=[obj.tumblelog.mount_on, obj.slug])
+        obj.__dict__.update(permalink=permalink)
+        # override any custom variables
+        if isinstance(obj.custom_data, dict):
+            obj.__dict__.update(**obj.custom_data)
 
     # set up FilterExpression from object_list
     sequence = FilterExpression('', parser)
