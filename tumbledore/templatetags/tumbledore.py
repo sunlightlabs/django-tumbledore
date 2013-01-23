@@ -65,6 +65,8 @@ def do_tumbleposts(parser, token):
     # preflight kwargs before running any queries
     if not var_name or '=' in var_name or not kwargs.get('tumblelog_id'):
         raise template.TemplateSyntaxError("'%s' tag requires at a minimum a post variable name and tumblelog_id." % tag_name)
+    order_by = None
+    limit = None
     if 'order_by' in kwargs:
         order_by = kwargs['order_by']
         del kwargs['order_by']
