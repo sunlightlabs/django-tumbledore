@@ -6,7 +6,10 @@ from tumbledore.models import *
 
 
 def index(request, mount_point):
-    page = int(request.GET.get('page', '1'))
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
     tumblelog = get_object_or_404(Tumblelog, mount_on=mount_point, is_active=True)
     queryset = tumblelog.posts.all() if request.user.is_staff else tumblelog.posts.published()
     if tumblelog.sort_posts_by == 'O':

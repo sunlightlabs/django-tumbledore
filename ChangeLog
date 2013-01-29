@@ -1,3 +1,7 @@
+2013-01-29 Dan Drinkard <ddrinkard@sunlightfoundation.com>
+* Catch ValueError when coercing page numbers, defaulting to 1.
+  Release is 0.1.10
+
 2012-10-04 Dan Drinkard <ddrinkard@sunlightfoundation.com>
 
 * Added template tag, {% tumbleposts as foo tumblelog_id=1 %} to iterate
