@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 urlpatterns = patterns('tumbledore.views',
     url(r'^tumblelog/widget/(?P<widget_id>[\d]+).js$', 'widget', name='tumble_widget'),
